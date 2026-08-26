@@ -8,9 +8,7 @@ stack at `[rsp+0x40]`, and the job was to read it from there and get
 
 My first attempt used:
 
-```asm
 mov rsi, [rsp+0x40]
-```
 
 which didn't work. My first theory was an offset problem, since `main`
 calls `solve` through a `call` instruction, the return address gets
@@ -31,9 +29,7 @@ that "address" happened to point, not from the flag.
 What I actually needed was the address of that stack location, not its
 contents — so I switched to `lea`:
 
-```asm
 lea rsi, [rsp+0x40]
-```
 
 This printed the flag, but the first 8 bytes were missing. That was the
 tell that my earlier `0x48` theory had been wrong the whole time — the
