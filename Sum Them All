@@ -20,11 +20,8 @@ read from.
 
 The fix was to actually allocate somewhere for it to write:
 
-```
-asm
 sub rsp, 32      ; carve out 32 bytes of real stack space
 mov rsi, rsp      ; point rsi at that buffer before calling itoa
-```
 
 Then I reused that same address, `mov rsi, rsp` again — as the buffer
 argument for the `write` syscall, so it read from exactly where `itoa`
